@@ -1,0 +1,44 @@
+1.Spring 整合 MyBatis
+    1.1 添加依赖    --  6个 jar 包
+        使用 lombok 需要 idea 添加 lombok的插件
+
+    1.2 添加配置文件  --  4个配置文件
+        jdbc.properties     连接数据库的配置文件
+        mybatis-config.xml  MyBatis 原生的配置文件
+        spring-config.xml   Spring  配置文件
+        spring-mybatis.xml  Spring 整合 MyBatis 的配置文件
+
+    1.3 druid 监控中心
+      <servlet>
+        <servlet-name>druid</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+      </servlet>
+
+      <servlet-mapping>
+        <servlet-name>druid</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+      </servlet-mapping>
+
+      通过访问 /druid/index.html 打开监控中心，可以监控 SQL 语句的执行效率和执行次数
+
+    1.4 创建 Dao 层，添加持久层接口 UserDao
+
+    1.5 在resources 中添加 mapper 层的目录,在目录中添加指定的 UserMapper.xml
+        UserMapper.xml 中的 namespace 指向需要实现方法的接口路径
+
+2.动态SQL
+    <sql>       进行 SQL 语句的封装，一般用于字段名封装，通过 <include> 加载封装的 SQL 语句
+    <set>       替代 set 关键词，会自动省略后缀","
+    <if>        判断赋予给字段的参数是否为 null，为 null 则不添加,不为 null 则进行填充
+    <where>     替代 where 关键词，会自动省略 where 后面的 and 或者 or
+    <trim>      自定义标签，可以添加前缀和后缀，自定义根据需要删除前缀和后缀的关键词
+                 prefix：可选属性，用于指定前缀字符串。如果 SQL 语句片段的前缀与该属性匹配，则该前缀会被移除。
+                 suffix：可选属性，用于指定后缀字符串。如果 SQL 语句片段的后缀与该属性匹配，则该后缀会被移除。
+                 prefixOverrides：可选属性，用于指定要移除的开始部分。只有当 SQL 语句片段以指定的某个字符串为开始时，才会被修剪。
+                 suffixOverrides：可选属性，用于指定要移除的结束部分。只有当 SQL 语句片段以指定的某个字符串为结束时，才会被修剪。
+
+    <foreach>   遍历集合，collection 属性为要遍历的集合，
+                        open 属性为开始遍历前添加的内容，
+                        separator 属性为循环添加的内容
+                        close 属性为遍历结束后添加的内容
+                        item 属性为循环值

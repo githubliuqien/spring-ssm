@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mybatis.mapper.StuMapper">
+    <resultMap id="BaseResultMap" type="com.qf.mybatis.model.Stu">
+        <!--@Table stu-->
+        <result column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="sname" jdbcType="VARCHAR" property="sName"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        sid,
+        sname,
+        age,
+        gender
+    </sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="sid" parameterType="com.qf.mybatis.model.Stu">
+        insert into stu (sid, sname, age,
+                         gender)
+        values (#{sid,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+                #{gender,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qf.mybatis.model.Stu">
+        insert into stu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="sName != null">
+                sname,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="sName != null">
+                #{sName,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="queryMultiple" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from stu s
+        <where>
+            <if test="stu.SName != null  and stu.SName != ''">
+                s.sname = #{stu.sName}
+            </if>
+            <if test="stu.gender != null and stu.gender != ''">
+                and s.gender = #{stu.gender}
+            </if>
+            <if test="stu.sid != null">
+                and s.sid = #{stu.sid}
+            </if>
+            <if test="stu.age != null">
+                and s.age = #{stu.age}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteBatch">
+        delete
+        from stu  where sid
+        <foreach collection="list" open="  in  (" separator="," close=")" item="sid">
+            #{sid}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update stu
+         <set>
+             <if test="stu.age != null">
+                 stu.age = #{stu.age}  and
+             </if>
+             <if test="stu.sName != null and stu.sName != ''">
+                 stu.sname = #{stu.sName}
+             </if>
+
+             <if test="stu.gender != null  and stu.gender != ''">
+                 and stu.gender = #{stu.gender}
+             </if>
+         </set>
+
+        <where>
+            <if test="stu.sid != null ">
+                 stu.sid = #{stu.sid}
+            </if>
+        </where>
+    </update>
+</mapper>
