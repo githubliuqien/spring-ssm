@@ -1,0 +1,51 @@
+1.
+    Mapper 的字段与属性名的映射
+        <resultMap>为映射标签
+            id属性为引用的名字
+            type属性为对应的实体类
+
+        <id>为主键标签
+        <result>普通字段标签
+            property为实体类属性名
+            column为数据表的字段名
+
+        <association>为对象标签
+            property为对应实体类的对象属性名
+            javaType为对应实体类对象属性的类型
+
+        <collection>为集合对象标签
+            property为对应实体类的对象集合属性名
+            ofType为对应集合的泛型
+2.级联查询
+            property属性值为对象的属性名
+            ofType属性值为集合的泛型
+            column属性值为传递给指定方法的参数字段名
+            select属性值为查询引用所调用的接口方法路径
+        <collection property="powerList"
+                    ofType="Power"
+                    column="r_id"
+                    select="com.qf.ran.dao.PowerMapper.selectListByRoleId"/>
+
+
+3.MyBatis的缓存
+    3.1
+        一级缓存(本地缓存):
+            基于 SqlSession 的缓存，默认支持，只需要开启事务
+            事务配置:
+                <!--配置事务管理器-->
+                <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+                    <constructor-arg ref="dataSource"/>
+                </bean>
+
+                <!--开启事务的注解支持-->
+                <tx:annotation-driven transaction-manager="transactionManager"/>
+
+            在需要开启事务的方法上添加注解: @Transactional(readOnly = true)
+
+    3.2
+        二级缓存:
+            基于 SqlSessionFactory 级别的缓存,需要手动开启
+            修改 MyBatis 本身的配置文件
+                 <setting name="cacheEnabled" value="true"/>
+            在需要开启二级缓存的 Mapper.xml 的 mapper 标签中添加 <cache/>
+            Mapper.xml 增删改的标签中可以添加 flushCache="true" 代表调用此方法会刷新缓存
