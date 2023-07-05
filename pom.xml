@@ -18,10 +18,12 @@
 
   <modules>
     <module>spring-mybatis</module>
+    <module>spring-mybatis-relevancy-select</module>
   </modules>
 
 
   <build>
     <finalName>spring-ssm</finalName>
+
   </build>
 </project>

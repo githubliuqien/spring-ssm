@@ -21,10 +21,10 @@
 
       通过访问 /druid/index.html 打开监控中心，可以监控 SQL 语句的执行效率和执行次数
 
-    1.4 创建 Dao 层，添加持久层接口 UserDao
+    1.4 创建 mapper 层，添加持久层接口 StuMapper
 
-    1.5 在resources 中添加 mapper 层的目录,在目录中添加指定的 UserMapper.xml
-        UserMapper.xml 中的 namespace 指向需要实现方法的接口路径
+    1.5 在resources 中添加 mapper 层的目录,在目录中添加指定的 StuMapper.xml
+        StuMapper.xml 中的 namespace 指向需要实现方法的接口路径
 
 2.动态SQL
     <sql>       进行 SQL 语句的封装，一般用于字段名封装，通过 <include> 加载封装的 SQL 语句

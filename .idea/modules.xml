@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/spring-mybatis/spring-mybatis.iml" filepath="$PROJECT_DIR$/spring-mybatis/spring-mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-mybatis-relevancy-select/spring-mybatis-relevancy-select.iml" filepath="$PROJECT_DIR$/spring-mybatis-relevancy-select/spring-mybatis-relevancy-select.iml" />
     </modules>
   </component>
 </project>
