@@ -4,6 +4,7 @@ import com.qf.relevancy.model.po.User;
 import com.qf.relevancy.service.impl.UserServerImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -44,7 +45,7 @@ public class UserMapperTest {
 
     /**
      * 根据角色 id 查询当前角色信息(包含权限)
-     * @param id
+     * @param
      * @return
      */
     @Test
@@ -65,7 +66,6 @@ public class UserMapperTest {
      *
      *
      *
-     *
       */
     @Test
     public void  selectAllInfo(){
@@ -76,8 +76,8 @@ public class UserMapperTest {
     @Resource
     UserServerImpl userServer;
 
-
     @Test
+    @Autowired
     public void   User(){
         userMapper.selectByIdToAllInfo(1);
         userMapper.selectByIdToAllInfo(1);

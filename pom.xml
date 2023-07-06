@@ -19,6 +19,7 @@
   <modules>
     <module>spring-mybatis</module>
     <module>spring-mybatis-relevancy-select</module>
+    <module>spring-logback</module>
   </modules>
 
 

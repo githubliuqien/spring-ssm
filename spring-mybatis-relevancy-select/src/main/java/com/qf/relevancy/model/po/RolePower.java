@@ -1,7 +1,5 @@
 package com.qf.relevancy.model.po;
 
-
-
 /**
     * 角色和权限的中间表
 */

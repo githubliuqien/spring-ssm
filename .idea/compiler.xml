@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring-mybatis-relevancy-select" />
         <module name="spring-mybatis" />
+        <module name="spring-logback" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
