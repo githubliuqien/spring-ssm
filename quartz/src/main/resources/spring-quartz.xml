@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.qf.quartz"/>
+
+    <!-- 1.定义任务 Bean ，可以使用 JobDetailFactoryBean 或者 MethodInvokingJobDetailFactoryBean-->
+    <bean name="myJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <!--制定任务的名称-->
+        <property name="name" value="clockInJob"/>
+        <!--制定任务的组织名-->
+        <property name="group" value="com.qf.ran"/>
+        <!--制定具体任务执行的类-->
+        <property name="jobClass" value="com.qf.quartz.job.SubmitJob"/>
+    </bean>
+
+    <!--2.定义触发器,绑定任务对象,一个触发器只能绑定一个任务对象-->
+    <bean id="clockTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--制定触发器的名字-->
+        <property name="name" value="trigger1"/>
+        <!--制定触发器的组织名-->
+        <property name="group" value="trigger_group1"/>
+        <!--把定时任务对象绑定到触发器中-->
+        <property name="jobDetail" ref="myJob"/>
+        <!--制定时间规则(Cron表达式)-->
+        <property name="cronExpression" value="0/2 * * * * ?"/>
+    </bean>
+
+    <!--3.定义调度器,绑定触发器对象-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!--绑定触发器，可以绑定多个触发器-->
+        <property name="triggers">
+            <list>
+                <ref bean="clockTrigger"/>
+            </list>
+        </property>
+        <!-- 加载 quartz 配置，如下两种方式均可 -->
+        <!--<property name="configLocation" value="classpath:quartz.properties"></property>-->
+        <!--添加 quart 的配置-->
+        <property name="quartzProperties">
+            <value>
+                # 指定调度器名称，实际类型为：QuartzScheduler
+                org.quartz.scheduler.instanceName = MyScheduler
+                # 指定连接池
+                org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool
+                # 连接池线程数量
+                org.quartz.threadPool.threadCount = 11
+                # 优先级
+                org.quartz.threadPool.threadPriority = 5
+                # 不持久化job
+                org.quartz.jobStore.class = org.quartz.simpl.RAMJobStore
+            </value>
+        </property>
+    </bean>
+</beans>

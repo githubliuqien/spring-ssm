@@ -1,0 +1,49 @@
+1.LogBack   --  日志框架
+    1.1 加载依赖
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.2.3</version>
+        </dependency>
+
+    1.2 创建配置文件 logback.xml (不能更改文件名)
+            日志级别:
+                 all         记录所有的日志
+                 trace       记录程序运行的轨迹
+                 debug       开发环境使用的级别，开发阶段打印数据使用
+                 info        生成环境使用的级别，输出程序运行时
+                 warn        可能出现错误的情况
+                 error       打印错误信息
+                 fatal       出现重大错误时，可能会导致系统不能正常运行
+                 off         不记录
+    1.3 业务层添加注解@Slf4j，方法中直接使用log对象调用 info(),debug().warn().error()
+
+2.Quartz    --  定时任务框架
+    2.1 加载依赖
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.3.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.3.23</version>
+        </dependency>
+
+    2.2 创建定时任务类实现 Job 接口,重写 execute() 方法，编写定时任务
+
+    2.3 添加配置文件 spring-quartz.xml
+        2.3.1 定义任务 bean
+        2.3.2 定义触发器 bean，并且绑定一个任务 bean
+        2.3.3 定义调度器 bean，并绑定触发器 bean 集合以及加载或者配置 quartz 原生配置
+
+    2.4 业务层注入调度器的对象,通过对象调用 start() 开启调度器执行定时任务，clear() 清除调度器并结束调度器下所有的定时任务
+            @Autowired
+            private Scheduler scheduler;
+

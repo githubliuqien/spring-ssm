@@ -1,30 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.qf.spring</groupId>
-  <artifactId>spring-ssm</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>spring-ssm</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.qf.spring</groupId>
+    <artifactId>spring-ssm</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>spring-ssm</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <modules>
-    <module>spring-mybatis</module>
-    <module>spring-mybatis-relevancy-select</module>
-    <module>spring-logback</module>
-  </modules>
+    <modules>
+        <module>spring-mybatis</module>
+        <module>spring-mybatis-relevancy-select</module>
+        <module>spring-logback</module>
+        <!-- 定时任务调度框架   -->
+        <module>quartz</module>
+    </modules>
 
 
-  <build>
-    <finalName>spring-ssm</finalName>
+    <build>
+        <finalName>spring-ssm</finalName>
 
-  </build>
+    </build>
 </project>
